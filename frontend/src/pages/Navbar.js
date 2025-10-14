@@ -29,10 +29,8 @@ const Navbar = () => {
             <li className="nav-item"><Link className="nav-link" to="/job-feed">Job Feed</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
 
-            <li className="nav-item"><Link className="nav-link" to="/add-job">Add Job</Link></li>
-            <li className="nav-item">
-              <a className="nav-link" href="/update-profile">Update Profile</a>
-            </li>
+
+            
 
 
             <li className="nav-item">

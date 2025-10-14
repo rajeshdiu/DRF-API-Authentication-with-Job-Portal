@@ -25,11 +25,6 @@ class UserSerializer(serializers.ModelSerializer):
         if obj.profile_image:
             return request.build_absolute_uri(obj.profile_image.url)
         return None
-
-
-        
-
-
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -38,6 +33,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'password', 'User_Type']
 
     def create(self, validated_data):
+        
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email'),
@@ -45,9 +41,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             User_Type=validated_data.get('User_Type')
         )
         return user
-
-
-
 
 class LoginResponseSerializer(serializers.Serializer):
     refresh = serializers.CharField()

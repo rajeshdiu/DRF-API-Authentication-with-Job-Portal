@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path('job/JobList/', JobListCreateView.as_view(), name='job-list'),
+    path('job/MyJobList/', MyJobList.as_view(), name='MyJobList'),
     path('job/<int:pk>/', JobRetrieveUpdateDestroyView.as_view(), name='job-detail'),
     path('auth/dashboard-stats/', DashboardStatsView.as_view(), name='dashboard-stats'),
     

@@ -12,7 +12,6 @@ from .serializers import *
 
 class MyJobList(generics.ListAPIView):
     serializer_class = JobModelSerializers
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -20,10 +19,6 @@ class MyJobList(generics.ListAPIView):
             return JobModel.objects.filter(Recruiter=user)
         return JobModel.objects.all()
     
-    def perform_create(self, serializer):
-        serializer.save(Recruiter=self.request.user)
-
-
 
 
 class JobListCreateView(generics.ListCreateAPIView):
@@ -31,9 +26,7 @@ class JobListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        user = self.request.user
-        if user.User_Type == "Recruiter":
-            return JobModel.objects.filter(Recruiter=user)
+        
         return JobModel.objects.all()
 
     def perform_create(self, serializer):
@@ -53,20 +46,16 @@ class DashboardStatsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        total_users = User.objects.count()
+        total_users = User.objects.all().count()
         total_recruiters = User.objects.filter(User_Type='Recruiter').count()
         return Response({
             "total_users": total_users,
             "total_recruiters": total_recruiters
         })
 
-class RegisterView(APIView):
-    def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny] 
 
 
 class LoginView(APIView):

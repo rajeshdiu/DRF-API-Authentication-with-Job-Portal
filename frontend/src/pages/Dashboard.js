@@ -29,11 +29,7 @@ const Dashboard = () => {
           <div className="col-md-6"><div className="card shadow p-4 text-center"><h5>Total Users</h5><h3>{stats.total_users}</h3></div></div>
           <div className="col-md-6"><div className="card shadow p-4 text-center"><h5>Total Recruiters</h5><h3>{stats.total_recruiters}</h3></div></div>
         </div>
-        <div className="card shadow p-4" style={{maxWidth:"600px", margin:"auto"}}>
-          <h2 className="text-primary mb-4">Welcome {user.username}</h2>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>User Type:</strong> {user.User_Type}</p>
-        </div>
+      
       </div>
     </>
   );
